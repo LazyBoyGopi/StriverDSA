@@ -1,0 +1,43 @@
+import java.util.*;
+public class PracticeSession {
+    private static int findTheSecondLargestElementInAArray(int[]ar)
+    {
+        int first = Integer.MIN_VALUE+1 , second = Integer.MIN_VALUE;
+        for(int ele : ar)
+        {
+            if(ele > first )
+            {
+                second = first;
+                first = ele;
+            }
+            else if(ele > second && ele != first)
+            {
+                second = ele;
+            }
+        }
+        return second;
+    }
+    private static int findTheSecondSmallestElementInAArray(int[]ar)
+    {
+        int smallest = ar[0];
+        int secondSmallest = Integer.MAX_VALUE;
+        for(int ele : ar)
+        {
+            if(ele < smallest)
+            {
+                secondSmallest = smallest;
+                smallest = ele;
+            }
+            else if(ele < secondSmallest && ele > smallest)
+            {
+                secondSmallest = ele;
+            }
+        }
+        return secondSmallest;
+    }
+    public static void main(String[] args) {
+        int[]ar = {4,8,23,4,5,2,14,5,76,76,8,8,54,32,2};
+        int ele = findTheSecondSmallestElementInAArray(ar);
+        System.out.println("Second Smallest ele is "+ele);
+    }
+}
