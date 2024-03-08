@@ -97,8 +97,8 @@ public class PracticeSession {
         if(low <= high)
         {
             int pivotIdx = getPivotIdx(ar, low, high);
-            helperMergeSort(ar, low, pivotIdx-1);
-            helperMergeSort(ar, pivotIdx+1,high);
+            helperQuickSort(ar, low, pivotIdx-1);
+            helperQuickSort(ar, pivotIdx+1,high);
         }
     }
     private static void quickSort(int[]ar)
