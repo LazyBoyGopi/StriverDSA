@@ -1,0 +1,21 @@
+import java.util.Arrays;
+
+public class PracticeSession {
+    private static void movesZeroesToEnd(int[]ar)
+    {
+        int p1 = 0 , p2 = 0;
+        while(p1 < ar.length)
+        {
+            if(ar[p1] != 0) ar[p2++] = ar[p1++];
+            else p1++;
+        }
+        for(int i=p2;i<ar.length;i++) {
+            ar[i] = 0;
+        }
+    }
+    public static void main(String[] args) {
+        int[]ar = {1,2,3,4,2,0,0,8,0,0,0,0,0,0,6,5,4,32,2,11,1};
+        movesZeroesToEnd(ar);
+        System.out.println(Arrays.toString(ar));
+    }
+}
