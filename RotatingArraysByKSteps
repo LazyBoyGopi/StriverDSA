@@ -1,0 +1,52 @@
+import java.util.Arrays;
+
+public class PracticeSession {
+    private static void rotateArrayByKSteps(int[]ar,int k)
+    {
+        k %=ar.length;
+        int[]temp = new int[k];
+        int idx = 0;
+        for(int i=0;i<k;i++)
+        {
+            temp[idx++] = ar[i];
+        }
+        for(int i=k;i<ar.length;i++)
+        {
+            ar[i-k] = ar[i]; 
+        }
+        for(int i=0;i<temp.length;i++)
+        {
+
+            ar[ar.length-k+i] = temp[i];
+        }
+    }
+    private static void reverse(int[]ar,int st,int end)
+    {
+        while(st < end)
+        {
+            int temp = ar[st];
+            ar[st++] = ar[end];
+            ar[end--] = temp;
+        }
+    }
+    private static void reverseArrayByKStepsWithoutAnyExtraSpaceLeftRotate(int[]ar,int k)
+    {
+        reverse(ar,0,k-1);
+        reverse(ar,k,ar.length-1);
+        reverse(ar,0,ar.length-1);
+    }
+    private static void reverseArrayByKStepsWithoutAnyExtraSpaceRightRotate(int[]ar,int k)
+    {
+        if(ar.length == 0) return;
+        k%=ar.length;
+        if(k > ar.length) return;
+        reverse(ar,ar.length-k,ar.length-1);
+        reverse(ar,0,ar.length-k-1);
+        reverse(ar,0,ar.length-1);
+    }
+    public static void main(String[] args) {
+        int[]ar = {1};
+        reverseArrayByKStepsWithoutAnyExtraSpaceRightRotate(ar,11);
+        System.out.println(Arrays.toString(ar));
+    }
+}
