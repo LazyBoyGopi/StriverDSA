@@ -1,0 +1,54 @@
+import java.util.*;
+class  HelloWorld{
+    //Optimised Approach
+    private static int missingNumber4(int[]ar)
+    {
+        int xor1 = 0 , xor2 = 0;
+        for(int i=0;i<ar.length-1;i++)
+        {
+            xor1 ^= i+1;
+            xor2 ^= ar[i];
+        }
+        xor1 ^= ar.length;
+        return xor1 ^ xor2;
+    }
+    //Optimised Approach
+    private static int missingNumber3(int[]ar)
+    {
+        int n = ar.length-1;
+        int totalSum = ar[n]*(ar[n]+1)/2;
+        int sum = 0;
+        for(int ele : ar) sum += ele;
+        return totalSum - sum;
+    }
+    //Better
+    private static int missingNumber1(int[]ar)
+    {
+        boolean[]hash = new boolean[ar.length+2];
+        for(int i = 0;i<ar.length;i++)
+        {
+            hash[ar[i]] = true;
+        }
+        for(int i=1;i<hash.length;i++) if(!hash[i]) return i;
+        return ar.length+1;
+    }
+
+    //Brute Force
+    private static int missingNumber(int[]ar)
+    {
+        for(int i=1;i<=ar.length;i++)
+        {
+            boolean flag = false;
+            for(int j=0;j<ar.length;j++)
+            {
+                if(i == ar[j]) flag = true;
+            }
+            if(!flag) return i;
+        }
+        return ar.length+1;
+    }
+    public static void main(String[] args) {
+        int[]ar = {1,2,3,5,4,6,8};
+        System.out.println(missingNumber4(ar));
+    }
+}
