@@ -1,0 +1,48 @@
+import java.util.*;
+public class SudokoSlover {
+    private static int[] twoSum(int[]ar,int target)
+    {
+        Arrays.sort(ar);
+        int st = 0 , end = ar.length-1;
+        while(st <= end)
+        {
+            int res = ar[st] + ar[end];
+            if(res == target) return new int[]{st,end};
+            else if(res > target) end--;
+            else st++;
+        }
+        return new int[]{-1,-1};
+    }
+    private static int[] twoSumUsingHashMap(int[]ar,int target)
+    {
+        Map<Integer,Integer> map = new HashMap<>();
+        for(int i=0;i<ar.length;i++)
+        {
+            int comp = target-ar[i];
+            if(map.containsKey(comp))
+            {
+                return new int[]{map.get(comp),i};
+            }
+            map.put(ar[i],i);
+        }
+        return new int[]{-1,-1};
+    }
+    private static int[] twoSumUsingBruteForce(int[]ar,int target)
+    {
+        
+        for(int i=0;i<ar.length-1;i++)
+        {
+            for(int j=i+1;j<ar.length;j++)
+            {
+                if(ar[i]+ar[j] == target) return new int[]{i,j};
+            }
+        }
+        return new int[]{-1,-1};
+    }
+    public static void main(String[] args) {
+        int[]ar = {1,2,3,4,5,6,8};
+        int target = 9;
+        int[]ans = twoSumUsingHashMap(ar, target);
+        System.out.println(Arrays.toString(ans));
+    }
+}
