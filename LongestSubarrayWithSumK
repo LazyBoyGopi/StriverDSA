@@ -1,0 +1,27 @@
+import java.util.*;
+public class LongestSubarrayWithSumK {
+    static int longestSubarrayWithSumK(int[]ar,int k)
+    {
+        long preSum = 0;
+        int max = 0;
+        Map<Long,Integer> map  = new HashMap<>();
+        for(int i=0;i<ar.length;i++)
+        {
+            preSum += ar[i];
+            long key = preSum-k;
+            if(map.containsKey(key))
+            {
+                max = Math.max(max,i-map.get(key));
+            }
+            if(!map.containsKey(preSum))
+            map.put(preSum,i);
+        }
+        return max;
+    }
+    public static void main(String[] args) {
+        int[]ar = {1,2,3,0,0,0,1,1,1,1,4,3,2};
+        int k = 3;
+        int res = longestSubarrayWithSumK(ar,k);
+        System.out.println(res);
+    }
+}
