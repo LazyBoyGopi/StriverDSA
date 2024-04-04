@@ -1,0 +1,48 @@
+import java.util.*;
+
+class HelloWorld {
+    private static void fill(int[] ans, int st, List<Integer> list) {
+        int idx = st;
+        for (int i = st * 2; idx < list.size(); i++) {
+            ans[i] = list.get(idx++);
+        }
+    }
+
+    public static int[] alternateNumbers(int[] a) {
+        List<Integer> neg = new LinkedList<>();
+        List<Integer> pos = new LinkedList<>();
+        
+        // Separate positive and negative integers into different lists
+        for (int ele : a) {
+            if (ele > 0) pos.add(ele);
+            else if (ele < 0) neg.add(ele);
+        }
+        
+        // Initialize the result array with the same length as the input array
+        int[] ans = new int[a.length];
+        
+        // Calculate the minimum length between neg and pos lists
+        int minLen = Math.min(neg.size(), pos.size());
+        
+        // Fill the ans array with alternating positive and negative integers
+        for (int i = 0; i < minLen; i++) {
+            ans[i * 2] = pos.get(i);
+            ans[i * 2 + 1] = neg.get(i);
+        }
+        
+        // Fill the remaining part of ans array with the remaining integers from the respective list
+        if (neg.size() == minLen) {
+            fill(ans, minLen, pos);
+        } else if (pos.size() == minLen) {
+            fill(ans, minLen, neg);
+        }
+        
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int[] ar = {1, 2, -3, -1, -2, 3, 4, 5, 6, 7};
+        int[] ans = alternateNumbers(ar);
+        System.out.println(Arrays.toString(ans));
+    }
+}
