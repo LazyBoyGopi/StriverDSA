@@ -1,0 +1,21 @@
+import java.util.*;
+public class Solution {
+    public static int subarraysWithSumK(int []a, int b) {
+        // Write your code here
+        Map<Integer,Integer> map = new HashMap<>();
+        map.put(0,1);
+        int count =0;
+        int xor = 0;
+        for(int ele : a)
+        {
+            xor = ele^xor;
+            int comp = xor^b;
+            if(map.containsKey(comp))
+            {
+                count += map.get(comp);
+            }
+            map.put(xor,map.getOrDefault(xor, 0)+1);
+        }
+        return count;
+    }
+}
