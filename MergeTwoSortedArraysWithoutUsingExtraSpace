@@ -1,0 +1,44 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+import java.util.Arrays;
+class HelloWorld {
+    private static void sortArrays(int[]ar1,int[]ar2)
+    {
+        int left = ar1.length-1 , right = 0;
+        while(left >= 0 && right < ar2.length)
+        {
+            if(ar1[left] > ar2[right])
+            {
+                int temp = ar1[left];
+                ar1[left] = ar2[right];
+                ar2[right] = temp;
+                left--;
+                right++;
+            }
+            else break;
+        }
+        Arrays.sort(ar1);
+        Arrays.sort(ar2);
+    }
+    private static void sortArrays1(int[]ar1,int[]ar2)
+    {
+        int times = (ar1.length+ar2.length);
+        while(times != 1)
+        {
+            times /= 2;
+            int left = 0 , right = times < ar1.length ? times : times - (ar1.length-1) ;
+            while(left <= ar1.length && right <= ar2.length)
+            {
+                if(left == ar1.length) left = 0;
+            }
+        }
+        
+    }
+    public static void main(String[] args) {
+        int[]ar1 = {1,4,7,9};
+        int[]ar2 = {0,3,7,8,11};
+        sortArrays(ar1,ar2);
+        System.out.println(Arrays.toString(ar1));
+        System.out.println(Arrays.toString(ar2));
+    }
+}
