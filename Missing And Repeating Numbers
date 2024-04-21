@@ -35,3 +35,24 @@ public class Solution {
         return new int[]{zero,one};
     }
 }
+
+
+import java.util.*;
+public class Solution {
+    public static int[] findMissingRepeatingNumbers(int[] a) {
+        long n = a.length;
+       long s = 0 , ss = 0;
+       for(int ele : a)
+       {
+           s += ele;
+           ss += ((long)ele*(long)ele);
+       } 
+       long s1 = (n*(n+1))/2 , ss2 = (n*(n+1)*(2*n+1))/6;
+       long val1 = s - s1 ;
+       long val2 = (ss - ss2)/val1;
+       long x = (val1+val2)/2;
+       long y = x-val1;
+       return new int[]{(int)x,(int)y};
+
+    }
+}
