@@ -1,0 +1,41 @@
+import java.util.ArrayList;
+public class Solution {
+    private static boolean isPossible(ArrayList<Integer> list , int pages , int m)
+    {
+        int sum = 0;
+        for(int ele : list)
+        {
+            if(ele + sum <= pages)
+            {
+               sum += ele;
+            }
+            else{
+                sum = ele;
+                m--;
+            }
+            if(m == 0) return true;
+        }
+        return m <= 0;
+    }
+    public static int findPages(ArrayList<Integer> arr, int n, int m) {
+        if(m > arr.size()) return -1;
+       int st = 0 , end = 0;
+       for(int ele : arr)
+       {
+           st = Math.max(st,ele);
+           end += ele;
+       }
+       while(st <= end)
+       {
+           int mid = st+(end-st)/2;
+           if(isPossible(arr,mid,m))
+           {
+               st = mid+1;
+           }
+           else{
+               end = mid-1;
+           }
+       }
+       return st;
+    }
+}
