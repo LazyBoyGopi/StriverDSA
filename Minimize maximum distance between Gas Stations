@@ -76,3 +76,39 @@ public class Solution {
         return q.poll().value;
     }
 }
+
+
+
+//Optimised
+
+
+class Solution {
+    static private int countStations(int[]stations,double mid){
+        int count = 0;
+        for(int i=0;i<stations.length-1;i++){
+            int inBetween = (int)((stations[i+1]-stations[i])/mid);
+            if(stations[i+1]-stations[i] == inBetween*mid) inBetween--;
+            count += inBetween;
+        }
+        return count;
+    }
+    private static double maxDis(int[]stations){
+        int dis = -1;
+        for(int i=0;i<stations.length-1;i++){
+            int curDis = stations[i+1]-stations[i];
+            dis = Math.max(dis,curDis);
+        }
+        return dis;
+    }
+    public static double findSmallestMaxDist(int stations[], int k) {
+       double st = 0 , end = maxDis(stations);
+       double diff = 1e-6;
+       while(end-st > diff){
+           double mid = (st+end)/2.0;
+           int numOfStations = countStations(stations,mid);
+           if(numOfStations > k) st = mid;
+           else end = mid;
+       }
+       return end;
+    }
+}
